@@ -6,19 +6,32 @@ class Solution(object):
         :type wordlist: Set[str]
         :rtype: List[List[int]]
         """
+        def getpaths(pre,word):
+            #print 'getpahts',pre,word
+            if len(pre[word])<=0:
+                return [[word]]
+            pre_word_list=pre[word]
+            paths=[]
+            for pre_word in pre_word_list:
+                paths=paths+getpaths(pre,pre_word)
+            for path in paths:
+                path.append(word)
+            #print ("get paths end",pre,word,paths)
+            return paths
+                
         ret=[]
         if beginWord==endWord:
-            return ret[beginWord]
+            return [beginWord]
         seq=[]
         seq.append(beginWord)
         pace,pre={},{}
         min_pace=len(wordlist)+10
         pace[beginWord]=0
-	pre[0]=None
-	k=0
-        while len(seq)>k:
-            word=seq[k]
-            k+=1
+        pre[beginWord]=[]
+        word_set=set(wordlist)
+        while len(seq)>0:
+            #print 'seq',seq
+            word=seq[0]
             if pace[word]>=min_pace:
                 break
             for i in range(0,len(word)):
@@ -26,24 +39,22 @@ class Solution(object):
                     new_word=word[0:i]+l+word[i+1:]
                     if new_word==endWord:
                         min_pace=pace[word]+1
-                        path=[]
-                        p=k-1
-                        while pre[p]!=None:
-			    print p
-                            path.append(seq[p])
-			    p=pre[p]
-                        pa=[seq[p]]+path[::-1]+[new_word]
-                        ret.append(pa)
-			print('pre',pre)
-			print('seq',seq)
-			print('ret',pa)
-                    elif new_word in wordlist:
-			if new_word in pace:
-			    if pace[word]>=pace[new_word]:
-				continue
+                        paths=getpaths(pre,word)
+                        for path in paths:
+                            ret.append(path[::]+[new_word])
+                        #print ret
+                    elif new_word in pre:
+                        if pace[word]>=pace[new_word]:
+                            continue
+                        pre[new_word].append(word)
+
+                    elif new_word in word_set:
                         pace[new_word]=pace[word]+1
-                        pre[len(seq)]=k-1
+                        pre[new_word]=[word]
+                        word_set.remove(new_word)
                         seq.append(new_word)
+            del seq[0]
+        #print 'last ret',ret
         return ret
         
 p=Solution()
