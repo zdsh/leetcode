@@ -29,7 +29,7 @@ class Solution(object):
                 ret += 'aab' 
             else:
                 ret += 'a' * left_A
-                left_A -= 0
+                left_A = 0
                 break
             left_B -= 1
             left_A -= 2
