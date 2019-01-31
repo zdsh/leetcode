@@ -28,7 +28,8 @@ class Solution(object):
             if left_B > 0:                
                 ret += 'aab' 
             else:
-                ret += 'aa'
+                ret += 'a' * left_A
+                left_A -= 0
                 break
             left_B -= 1
             left_A -= 2
@@ -43,15 +44,13 @@ class Solution(object):
         if left_A > 0:
             ret += 'a' * left_B
         if reverse:
-            ret.replace('a', 'c')
-            ret.replace('b', 'a')
-            ret.replace('c', 'b')
+            ret = ret.replace('a', 'c').replace('b', 'a').replace('c', 'b')
 
         return ret
 
 if __name__ == '__main__':
     solution = Solution()
-    print solution.strWithout3a3b(1, 2)
+    print solution.strWithout3a3b(1, 3)
     print solution.strWithout3a3b(4, 1)
     print solution.strWithout3a3b(1, 4)
     print solution.strWithout3a3b(10, 1)
