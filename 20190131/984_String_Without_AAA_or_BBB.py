@@ -18,38 +18,41 @@ class Solution(object):
         if B == 0:
              return 'a' * A
 
-        if A <= B:
-            left_A, left_B = A, B
-            while left_B > left_A:
-                ret += 'bba'
-                left_B -= 2
-                left_A -= 1
-            while left_B > 0 and left_A > 0:
-                ret += 'ba'
-                left_B -= 1
-                left_A -= 1
-            if left_A > 0:
-                ret += 'a' * left_A
-            return ret
+        reverse = False
+        if A < B:
+            A, B = B, A
+            reverse = True
 
-        if A > B:
-            left_A, left_B = A, B
-            while left_B < left_A:
-                ret += 'aab'
-                left_B -= 1
-                left_A -= 2
-            while left_B > 0 and left_A > 0:
-                ret += 'ab'
-                left_B -= 1
-                left_A -= 1
-            if left_B > 0:
-                ret += 'b' * left_B
-            return ret
+        left_A, left_B = A, B
+        while left_B < left_A:
+            if left_B > 0:                
+                ret += 'aab' 
+            else:
+                ret += 'aa'
+                break
+            left_B -= 1
+            left_A -= 2
+
+        while left_B > 0 and left_A > 0:
+            ret += 'ab'
+            left_B -= 1
+            left_A -= 1
+
+        if left_B > 0:
+            ret += 'b' * left_B
+        if left_A > 0:
+            ret += 'a' * left_B
+        if reverse:
+            ret.replace('a', 'c')
+            ret.replace('b', 'a')
+            ret.replace('c', 'b')
+
+        return ret
 
 if __name__ == '__main__':
     solution = Solution()
     print solution.strWithout3a3b(1, 2)
     print solution.strWithout3a3b(4, 1)
-    print solution.strWithout3a3b(4, 1)
+    print solution.strWithout3a3b(1, 4)
     print solution.strWithout3a3b(10, 1)
     print solution.strWithout3a3b(4, 3)
