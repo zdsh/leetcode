@@ -9,7 +9,7 @@ class Solution(object):
         ret = 0
         two_dic = {}
         for i in range(0, len(A)):
-            for j in range(i, len(A)):
+            for j in range(0, len(A)):
                 if A[i] & A[j] not in two_dic:
                     two_dic[A[i] & A[j]] = 0
                 two_dic[A[i] & A[j]] += 1
