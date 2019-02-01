@@ -22,7 +22,7 @@ class Solution(object):
             new_cells.append(0)
             for i in range(0, len(recode)):
                 if recode[i] == new_cells:
-                    return recode[N%(day-i)]                
+                    return recode[i:][(N-day)%(day-i)]                
             recode.append(new_cells)
             cells = new_cells
             day += 1
@@ -31,4 +31,6 @@ class Solution(object):
 if __name__ =='__main__':
     solution = Solution()
     print solution.prisonAfterNDays([0,1,0,1,1,0,0,1], 7)
+    print solution.prisonAfterNDays([1, 1, 0, 1, 1, 0, 1, 1], 6)
     print solution.prisonAfterNDays([1,0,0,1,0,0,1,0], 1000000000) 
+    print solution.prisonAfterNDays([1, 0, 0, 1, 0, 0, 0, 1], 826)
