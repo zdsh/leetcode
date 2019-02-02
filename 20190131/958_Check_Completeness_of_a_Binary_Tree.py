@@ -21,14 +21,24 @@ class Solution(object):
         while index < len(root_list):       
             p = root_list[index]
             index += 1
-            if p.left == None and p.right == None and index == len(root_list):
-                return True
             if p.left != None:
                  root_list.append(p.left)
+            else:
+                if p.right != None:
+                    return False
+                while index < len(root_list):
+                    p = root_list[index]
+                    if p.left != None or p.right != None:
+                        return False
+                    index += 1
+                return True
+
             if p.right != None:
                  root_list.append(p.right)
-            if index == len(root_list):
-                return True
             else:
-                return False
-        
+                while index < len(root_list):
+                    p = root_list[index]
+                    if p.left != None or p.right != None:
+                        return False
+                    index += 1
+                return True
