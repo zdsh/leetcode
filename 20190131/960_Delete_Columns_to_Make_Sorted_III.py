@@ -20,5 +20,10 @@ class Solution(object):
                 if k == len(A):
                     value = max(value, result[j] + 1)
             result[i] = value
-        return result[-1]
+        return len(A[0]) - max(result)
+
+if __name__ == '__main__':
+    solution = Solution()
+    A = ["abbba"]
+    print solution.minDeletionSize(A)
         
