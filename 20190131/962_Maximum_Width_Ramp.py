@@ -8,11 +8,9 @@ class Solution(object):
         :type A: List[int]
         :rtype: int
         """
-        res = [0] * len(A)
+        res = 0
         for i in range(1, len(A)):
-            value = res[i]
-            for j in range(0, i):
+            for j in range(0, i - res):
                 if A[i] >= A[j]:
-                    value = max(value, i - j)
-            res[i] = value
-        return max(res)
+                    res = max(res, i - j)
+        return res
