@@ -21,7 +21,7 @@ class Solution(object):
         for row in range(0, len(grid)):
             for col in range(0, len(grid[row])):
                 for region_id in range(0, len(recode[row][col])):
-                    if recode[row][col][region_id] != 0:
+                    if recode[row][col][region_id] == 0:
                         id += 1
                         recode[row][col][region_id] = id
                         search_list =[[row, col, region_id]]
@@ -50,8 +50,8 @@ class Solution(object):
                             if grid[x][y] == '\\':
                                 if p >= 1 and p <= 2:
                                     q = 2 if p == 1 else 1
-                                if p ==0 or p == 4:
-                                    q = 4 if p == 0 else 0
+                                if p ==0 or p == 3:
+                                    q = 3 if p == 0 else 0
                                 if recode[x][y][q] == 0:
                                     recode[x][y][q] = id
                                     search_list.append([x, y, q ])
@@ -69,9 +69,33 @@ class Solution(object):
                                    recode[x][y + 1][0] = id
                                    search_list.append([x, y + 1, 0])
                             if p == 3:                  
-                               if x + 1 <= len(recode)  and recode[x + 1][y][1] == 0:
+                               if x + 1 < len(recode)  and recode[x + 1][y][1] == 0:
                                    recode[x + 1][y][1] = id
                                    search_list.append([x + 1, y, 1])
                   
  
         return id           
+
+if __name__ =='__main__':
+    solution = Solution()
+    grid = [
+      " /",
+        "/ "
+        ]
+    grid = [
+      " /",
+        "  "
+        ]
+    grid = [
+      "\\/",
+        "/\\"
+        ]
+    grid = [
+      "/\\",
+        "\\/"
+        ]
+    grid = [
+      "//",
+        "/ "
+        ]
+    print solution.regionsBySlashes(grid) 
