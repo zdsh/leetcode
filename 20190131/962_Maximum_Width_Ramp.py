@@ -9,8 +9,9 @@ class Solution(object):
         :rtype: int
         """
         res = 0
-        for i in range(1, len(A)):
-            for j in range(0, i - res):
-                if A[i] >= A[j]:
-                    res = max(res, i - j)
+        sorted_index = sorted(range(0, len(A)), key=A.__getitem__)        
+        min_index = len(i)
+        for i in sorted_index:
+            res = max(res, i - min_index)
+            min_index = min(min_index, i)
         return res
