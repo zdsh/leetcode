@@ -17,9 +17,16 @@ class Solution(object):
         """
         if root == None:
             return True
-        if root.left != None and root.val != root.left.val:
-            return False
-        if root.right != None and root.val != root.right.val:
-            return False
-        return True
+        ret1 = True
+        if root.left != None:
+            if root.val != root.left.val:
+               ret1 =  False
+            else:
+               ret1 = isUnivalTree(root.left)
+        if root.right != None:
+            if root.val != root.right.val:
+                ret2 = False
+            else:
+               ret2 = isUnivalTree(root.rigt)
+        return ret1 and ret2
         
