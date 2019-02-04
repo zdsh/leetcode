@@ -2,24 +2,28 @@
 File: 963_Minimum_Area_Rectangle_II.py
 Date: 2019/02/04 10:02:46
 """
+import itertools
+
 class Solution(object):
     def minAreaFreeRect(self, points):
         """
         :type points: List[List[int]]
         :rtype: float
         """
-        n = len(N)
         points = set(map(tuple, points))
         ret = 0
-        for i in range(0, n):
-            for j in range(i + 1, n):
-                for k in range(j + 1, n):
-                    x = points[k][0] + points[j][0] - points[i][0]
-                    y = points[k][1] + points[j][1] - points[i][1]
-                    if (x, y) in points:
-                        length1 = (points[j][0] - points[i][0])**2 + (points[j][1] - points[i][1])**2
-                        length2 = (points[k][0] - points[i][0])**2 + (points[k][1] - points[i][1])**2
-                        area = length1**0.5 * length2**0.5
-                        ret = max(ret, area)
+        for p1, p2, p3 in itertools.permutations(points, 3):
+            p4 = (p3[0] + p2[0]- p1[0], p3[1] + p2[1]- p1[1])
+            if p4 in points:
+                if not (p2[0] - p1[0]) * (p3[0] - p1[0]) + (p2[1] - p1[1]) * (p3[1] - p1[1]) : 
+                    v1 = (p2[0] - p1[0])**2 + (p2[1] - p1[1])**2
+                    v2 = (p3[0] - p1[0])**2 + (p3[1] - p1[1])**2
+                    
+                    area = v1**0.5 * v2**0.5
+                    ret = max(ret, area)
+        return ret
 
-        return ret        
+if __name__ == '__main__':
+    solution = Solution()
+    points = [[0,1],[2,1],[1,1],[1,0],[2,0]] 
+    print solution.minAreaFreeRect(points)
