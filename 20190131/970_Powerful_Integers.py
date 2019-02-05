@@ -7,11 +7,17 @@ class Solution(object):
         :rtype: List[int]
         """
         ret = []
+        if x == 1 amd y == 1:
+            return [2]
         x_power  = 1
         while x_power < bound:
             y_power = 1
             while x_power + y_power <= bound:
                 ret.append(x_power + y_power)
                 y_power *= y
+                if y_power == y:
+                    break
             x_power *= x
-        return ret
+            if x_power == x:
+                break
+        return list(set(ret))
