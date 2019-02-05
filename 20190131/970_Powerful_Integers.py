@@ -7,8 +7,6 @@ class Solution(object):
         :rtype: List[int]
         """
         ret = []
-        if x == 1 and y == 1:
-            return [2]
         x_power  = 1
         while x_power < bound:
             y_power = 1
