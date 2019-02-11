@@ -20,13 +20,13 @@ class Solution(object):
         ret1 = True
         if root.left != None:
             if root.val != root.left.val:
-               ret1 =  False
+                ret1 =  False
             else:
-               ret1 = isUnivalTree(root.left)
+                ret1 = self.isUnivalTree(root.left)
+        ret2 = True
         if root.right != None:
             if root.val != root.right.val:
                 ret2 = False
             else:
-               ret2 = isUnivalTree(root.rigt)
+                ret2 = self.isUnivalTree(root.right)
         return ret1 and ret2
-        
