@@ -20,11 +20,26 @@ class Solution(object):
             if r <= l:
                 return True
 
-        l = int(L)
-        r = int(R)
-        ret = 0
-        while l * l <= r:
-            if checkPalindrome(l) and checkPalindrome(l * l):
-                ret += 1            
-            l += 1 
-        return ret
+        l, r = int(L), int(R)
+        i, ret = 1, 0
+        while i <= r:
+            pali1 = int(str(i) + str(i)[::-1][1:]) 
+            res = pali1 * pali1
+            if res <= r:
+                if res >= l and checkPalindrome(res):
+                    ret += 1
+            else:
+                break
+            i += 1 
+        i = 1
+        while i <= r:
+            pali1 = int(str(i) + str(i)[::-1]) 
+            res = pali1 * pali1
+            if res <= r:
+                if res >= l and checkPalindrome(res):
+                    ret += 1
+            else:
+                break
+            i += 1 
+
+        return ret 
