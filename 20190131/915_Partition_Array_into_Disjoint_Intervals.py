@@ -22,4 +22,5 @@ class Solution(object):
 if __name__ == '__main__':
     solution = Solution()
     A = [5,0,3,8,6]
+    A = [1,1,1,0,6,12]
     print solution.partitionDisjoint(A)

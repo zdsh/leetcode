@@ -17,7 +17,7 @@ class TopVotedCandidate(object):
             count[p] = count.get(p, 0) + 1
             if count[p] >= count.get(lead, 0):
                 lead = p
-            self.leads.append(p)
+            self.leads.append(lead)
 
     def q(self, t):
         """

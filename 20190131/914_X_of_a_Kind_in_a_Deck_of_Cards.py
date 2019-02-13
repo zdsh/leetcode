@@ -9,7 +9,7 @@ class Solution(object):
         :rtype: bool
         """
         if len(deck) <= 1:
-            return 0
+            return False
         count = {}
         for v in deck:
             count[v] = count.get(v, 0) + 1
