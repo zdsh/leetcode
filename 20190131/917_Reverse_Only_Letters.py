@@ -8,11 +8,17 @@ class Solution(object):
         :type S: str
         :rtype: str
         """
-        n, ret = len(S), ''
-        for i in range(0, n):
+        n = len(S)
+        ret = [''] * n
+        i, j = 0, n-1
+        while i < n:
             if S[i].isalpha():
-                ret[i] = S[n-1-i]
+                while not S[j].isalpha():
+                    j -= 1
+                ret[j] = S[i]
+                j -= 1
             else:
-                ret[n-1-i] = S[n-1-i]
-        return ret
+                ret[i] = S[i]
+            i += 1
+        return ''.join(ret)
 
