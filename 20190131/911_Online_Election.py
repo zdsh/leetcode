@@ -9,35 +9,22 @@ class TopVotedCandidate(object):
         :type persons: List[int]
         :type times: List[int]
         """
-        self.persons = persons
-        self.times = times 
+        self.leads = []
+        count ={}
+        self.times = times
+        lead = -1
+        for t, p in zip(times, persons):
+            count[p] = count.get(p, 0) + 1
+            if count[p] >= count.get(lead, 0):
+                lead = p
+            self.leads.append(p)
 
     def q(self, t):
         """
         :type t: int
         :rtype: int
         """
-        end = len(self.times) - 1
-        start = 0
-        while end >= start:
-            mid = (end + start) / 2
-            if self.times[mid] == t:
-                start = mid + 1
-                break
-            if self.times[mid] > t:
-                end = mid - 1
-            if self.times[mid] < t:
-                start = mid + 1
-        ret = None
-        vote_dic = {}
-        for i in range(0, start):
-            if self.persons[i] not in vote_dic:
-                vote_dic[self.persons[i]] = 0
-            vote_dic[self.persons[i]] += 1
-            if ret == None:
-                ret = self.persons[i]
-            elif vote_dic[self.persons[i]] >= vote_dic[ret]:
-                ret = self.persons[i]
+        ret = self.leads[bisect.bisect(self.times, t) - 1]
         return ret
 # Your TopVotedCandidate object will be instantiated and called as such:
 # obj = TopVotedCandidate(persons, times)
