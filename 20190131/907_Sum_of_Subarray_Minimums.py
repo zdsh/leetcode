@@ -9,14 +9,12 @@ class Solution(object):
         :rtype: int
         """
         n, ret = len(A), 0
-        record = [0] * n
-        for i in range(1, n+1):
-            for j in range(0, n + 1 - i):
-                v = sum(A[j:j+i])
-                if i > 1:
-                    v = min(min(record[j], record[j+1]), v)
-                record[j] = v
-            ret += sum(record[0:n + 1 - i])
-        return ret
-            
-            
+        stack = []
+        A = A + [0]
+        for i in range(0, n+1):
+            while stack and A[i] <= A[stack[-1]]:
+                cur = stack.pop()
+                pre = stack[-1] if stack else -1
+                ret += (cur - pre) * A[cur] * (i - cur)
+            stack.append(i)
+        return ret % (10**9 + 7)
