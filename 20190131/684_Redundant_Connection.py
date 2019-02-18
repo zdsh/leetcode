@@ -8,17 +8,25 @@ class Solution(object):
         :type edges: List[List[int]]
         :rtype: List[int]
         """
-
         parent = {}
         def find(x):
-            while x in parent and parent[x] != x:
+            while x in parent and parent[x] != x:                
+                parent[x] = parent[parent[x]]
                 x = parent[x]
             return x
-        
+
         def union(x, y):
-            parent[find(y)] = find(x)
-        
-        for edge in edges:
-            if find(edge[0]) == find(edge[1]):
-                return edge
-            union(edge[0], edge[1])
+            px = find(x)
+            py = find(y)
+            parent[px] = py
+            parent[py] = py
+
+        for a in A:
+            for f in range(2, int(math.sqrt(a)) + 1):
+                if a % f == 0:
+                    union(a, f)
+                    union(a, a / f)
+        counter = collections.defaultdict(int)
+        for a in A:
+            counter[find(a)] += 1
+        return max(counter.values())
